@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 require_once 'Database.php';
 
 class Post extends Database {
