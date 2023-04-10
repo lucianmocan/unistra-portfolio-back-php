@@ -13,21 +13,21 @@ class Post extends Database {
     private function initTable(){
         $this->pdo->query('CREATE TABLE IF NOT EXISTS contactRequests (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            firstname VARCHAR(255) NOT NULL, 
-            lastname VARCHAR(255) NOT NULL, 
+            firstName VARCHAR(255) NOT NULL, 
+            lastName VARCHAR(255) NOT NULL, 
             email VARCHAR(255) NOT NULL,
-            message TEXT NOT NULL
+            content TEXT NOT NULL
         )');
     }
 
     public function addUser(Contact $user){
         $stmt = $this->pdo->prepare("INSERT INTO contactRequests (
-                             firstname, lastname, email, message) 
-                            VALUES (:firstName, :lastName, :email, :message)");
+                             firstName, lastName, email, content) 
+                            VALUES (:firstName, :lastName, :email, :content)");
         $stmt->bindValue(':firstName', $user->getFirstName());
         $stmt->bindValue(':lastName', $user->getLastName());
         $stmt->bindValue(':email', $user->getEmail());
-        $stmt->bindValue(':message', $user->getContent());
+        $stmt->bindValue(':content', $user->getContent());
         $stmt->execute();
     }
 
