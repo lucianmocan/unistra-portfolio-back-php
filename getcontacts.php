@@ -8,6 +8,11 @@ require_once "Post.php";
 
 if (isset($_GET)) {
     $pdo = new Post();
-    echo json_encode($pdo->query('SELECT * FROM contactRequests')
-        ->fetchAll());
+    if (isset($_GET['id'])){
+        echo json_encode($pdo->getUserById($_GET['id']));
+    }
+    else {
+        echo json_encode($pdo->query('SELECT * FROM contactRequests')
+            ->fetchAll());
+    }
 }
