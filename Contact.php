@@ -38,7 +38,7 @@ class Contact
      */
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return htmlspecialchars_decode($this->firstName);
     }
 
     /**
@@ -46,7 +46,7 @@ class Contact
      */
     public function getLastName(): string
     {
-        return $this->lastName;
+        return htmlspecialchars_decode($this->lastName);
     }
 
     /**
@@ -54,7 +54,7 @@ class Contact
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return htmlspecialchars_decode($this->email);
     }
 
     /**
@@ -62,7 +62,7 @@ class Contact
      */
     public function getContent(): string
     {
-        return $this->content;
+        return htmlspecialchars_decode($this->content);
     }
 
 
