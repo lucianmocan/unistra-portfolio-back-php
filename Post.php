@@ -31,5 +31,28 @@ class Post extends Database {
         $stmt->execute();
     }
 
+    public function getUserById(int $id){
+        $stmt = $this->pdo->prepare('SELECT * FROM contactRequests WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
+    }
+
+    public function deleteUserByID(int $id){
+        $stmt = $this->pdo->prepare('DELETE FROM contactRequests WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+    }
+
+    public function updateUserByID(int $id, Contact $user){
+        $stmt = $this->pdo->prepare('UPDATE contactRequests SET 
+                             firstName = :firstName, lastName = :lastName, 
+                             email = :email, content = :content WHERE id = :id');
+        $stmt->bindValue(':firstName', $user->getFirstName());
+        $stmt->bindValue(':lastName', $user->getLastName());
+        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':content', $user->getContent());
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
+
     // create 2 php files one which gets called by the httpClient et l'autre qui fait le traitement.
 }
